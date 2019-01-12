@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>L C K</title>
   
-  
+  <subtitle>谎言是真相的倒影</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -10,7 +10,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>谎言是真相的倒影</name>
+    <name>Evolto</name>
     
   </author>
   
