@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="L C K">
 <meta property="og:description" content="IAAS平台搭建 准备步骤和网卡要求1.创建2台虚拟机分别叫做controller computecontroller 为控制节点compute为计算节点 controller 和compute都需要2张网卡一张网卡连接内网一张连接外网 contronller网卡1 192.168.100.10  网卡2 192.168.200.10 compute网卡2 192.168.100.20  网卡2">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-15T12:11:14.838Z">
+<meta property="og:updated_time" content="2019-01-15T12:13:04.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iaas搭建">
 <meta name="twitter:description" content="IAAS平台搭建 准备步骤和网卡要求1.创建2台虚拟机分别叫做controller computecontroller 为控制节点compute为计算节点 controller 和compute都需要2张网卡一张网卡连接内网一张连接外网 contronller网卡1 192.168.100.10  网卡2 192.168.200.10 compute网卡2 192.168.100.20  网卡2">
@@ -453,8 +453,9 @@ AODH_PASS=000000
 <pre><code>scp /etc/xiandian/o** root@compute:/etc/xiandian
 </code></pre><h2 id="controller节点服务的安装"><a href="#controller节点服务的安装" class="headerlink" title="controller节点服务的安装"></a>controller节点服务的安装</h2><p>然后进行安装脚本</p>
 <pre><code>iaas-pre-host.sh     
-</code></pre><p>然后重启<br>    reboot</p>
-<p>重启完成后安装mysql keystone glance nova neutron<br>安装mysql</p>
+</code></pre><p>然后重启</p>
+<pre><code>reboot
+</code></pre><p>重启完成后安装mysql keystone glance nova neutron<br>安装mysql</p>
 <pre><code>iaas-install-mysql.sh
 </code></pre><p>安装keystone</p>
 <pre><code>iaas-install-keystone.sh
@@ -474,12 +475,27 @@ AODH_PASS=000000
 <h2 id="compute-yum源配置"><a href="#compute-yum源配置" class="headerlink" title="compute yum源配置"></a>compute yum源配置</h2><p>直接修改yum源为用ftp连接controller的yum源</p>
 <pre><code>rm -rf /etc/yum.repos.d/*        
 vi　/etc/yum.repos.d/yum.repo    
-</code></pre><p>配置文件如下<br>    [centos]<br>    name=centos<br>    baseurl=<a href="ftp://192.168.10.10/centos/" target="_blank" rel="noopener">ftp://192.168.10.10/centos/</a><br>    gpgcheck=0<br>    enabled=1<br>    [iaas]<br>    name=iaas<br>    baseurl=<a href="ftp://192.168.10.10/iaas-repo/" target="_blank" rel="noopener">ftp://192.168.10.10/iaas-repo/</a><br>    gpgcheck=0<br>    enabled=1</p>
-<h2 id="compute-服务安装"><a href="#compute-服务安装" class="headerlink" title="compute 服务安装"></a>compute 服务安装</h2><p>yum list能列出后安装xiandian<br>    yum install-y iaas-xiandian</p>
-<p>安装iaas脚本</p>
+</code></pre><p>配置文件如下</p>
+<pre><code>[centos]
+name=centos
+baseurl=ftp://192.168.10.10/centos/
+gpgcheck=0
+enabled=1
+[iaas]
+name=iaas
+baseurl=ftp://192.168.10.10/iaas-repo/
+gpgcheck=0
+enabled=1
+</code></pre><h2 id="compute-服务安装"><a href="#compute-服务安装" class="headerlink" title="compute 服务安装"></a>compute 服务安装</h2><p>yum list能列出后安装xiandian</p>
+<pre><code>yum install-y iaas-xiandian
+</code></pre><p>安装iaas脚本</p>
 <pre><code>iaas-pre-host.sh
-</code></pre><p>重启<br>    root<br>之后安装nova 和neutron<br>    iaas-install-nova-compute.sh<br>     iaas-install-neutron-compute.sh<br>     iaas-install-neutron-compute-gre.sh</p>
-<h2 id="完成之后"><a href="#完成之后" class="headerlink" title="完成之后"></a>完成之后</h2><p>云平台搭建就完成了<br>保证自己主机p和云平台内网互通<br>在ie浏览器输入<br>192.168.100.10/dashboard<br>接下来就是页面操作了</p>
+</code></pre><p>重启<br>    root</p>
+<p>之后安装nova 和neutron</p>
+<pre><code>iaas-install-nova-compute.sh
+ iaas-install-neutron-compute.sh
+ iaas-install-neutron-compute-gre.sh
+</code></pre><h2 id="完成之后"><a href="#完成之后" class="headerlink" title="完成之后"></a>完成之后</h2><p>云平台搭建就完成了<br>保证自己主机p和云平台内网互通<br>在ie浏览器输入<br>192.168.100.10/dashboard<br>接下来就是页面操作了</p>
 
       
     </div>
@@ -491,7 +507,7 @@ vi　/etc/yum.repos.d/yum.repo
         <p><span>本文标题:</span><a href="/2019/01/10/iaas搭建/">iaas搭建</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Evolto 的个人博客">Evolto</a></p>
         <p><span>发布时间:</span>2019年01月10日 - 18时19分</p>
-        <p><span>最后更新:</span>2019年01月15日 - 20时11分</p>
+        <p><span>最后更新:</span>2019年01月15日 - 20时13分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/01/10/iaas搭建/" title="iaas搭建">http://yoursite.com/2019/01/10/iaas搭建/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/01/10/iaas搭建/　　作者: Evolto" title=""></span>
