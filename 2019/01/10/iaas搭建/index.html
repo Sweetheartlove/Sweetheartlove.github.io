@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="L C K">
 <meta property="og:description" content="IAAS平台搭建 准备步骤和网卡要求1.创建2台虚拟机分别叫做controller computecontroller 为控制节点compute为计算节点 controller 和compute都需要2张网卡一张网卡连接内网一张连接外网 contronller网卡1 192.168.100.10  网卡2 192.168.200.10 compute网卡2 192.168.100.20  网卡2">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-15T12:08:20.422Z">
+<meta property="og:updated_time" content="2019-01-15T12:11:14.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iaas搭建">
 <meta name="twitter:description" content="IAAS平台搭建 准备步骤和网卡要求1.创建2台虚拟机分别叫做controller computecontroller 为控制节点compute为计算节点 controller 和compute都需要2张网卡一张网卡连接内网一张连接外网 contronller网卡1 192.168.100.10  网卡2 192.168.200.10 compute网卡2 192.168.100.20  网卡2">
@@ -307,8 +307,19 @@
 <p>controller 和compute都需要2张网卡<br>一张网卡连接内网一张连接外网</p>
 <p>contronller网卡1 192.168.100.10  网卡2 192.168.200.10</p>
 <p>compute网卡2 192.168.100.20  网卡2 192.168.200.20</p>
-<h2 id="controller-yum源配置"><a href="#controller-yum源配置" class="headerlink" title="controller yum源配置"></a>controller yum源配置</h2><p>进入controller终端<br>    cd /opt<br>    mkdir iaas centos7<br>    rm -rf /etc/yum.repos.d/*<br>    vi　/etc/yum.repos.d/yum.repo<br>配置yum.repo<br>    [centos]<br>    name=centos<br>    baseurl=file:///opt/centos<br>    gpgcheck=0<br>    enabled=1</p>
-<pre><code>[iaas]
+<h2 id="controller-yum源配置"><a href="#controller-yum源配置" class="headerlink" title="controller yum源配置"></a>controller yum源配置</h2><p>进入controller终端</p>
+<pre><code>cd /opt
+mkdir iaas centos7  
+rm -rf /etc/yum.repos.d/*            
+vi　/etc/yum.repos.d/yum.repo    
+</code></pre><p>配置yum.repo</p>
+<pre><code>[centos]
+name=centos
+baseurl=file:///opt/centos
+gpgcheck=0
+enabled=1
+
+[iaas]
 name=iaas
 baseurl=file:///opt/iaas-repo
 gpgcheck=0
@@ -316,12 +327,21 @@ enabled=1
 </code></pre><p>挂载光盘</p>
 <pre><code>mount -o loop /dev/sr0 /opt/centos
 mount -o loop /dev/sr1 /opt/iaas
-</code></pre><p>关闭防火墙<br>    setenforce   0<br>    systemctl stop firewalld<br>    systemctl disable firewalld</p>
-<h2 id="ftp配置"><a href="#ftp配置" class="headerlink" title="ftp配置"></a>ftp配置</h2><p>控制节点yum list 成功后 装ftp<br>装完ftp 后<br>    vi  /etc/vsftp/vsftpd.conf<br>在最后一行添加<br>    anon_root=/opt</p>
-<pre><code>service vsftpd restart 
+</code></pre><p>关闭防火墙</p>
+<pre><code>setenforce   0    
+systemctl stop firewalld
+systemctl disable firewalld
+</code></pre><h2 id="ftp配置"><a href="#ftp配置" class="headerlink" title="ftp配置"></a>ftp配置</h2><p>控制节点yum list 成功后 装ftp<br>装完ftp 后</p>
+<pre><code>vi  /etc/vsftp/vsftpd.conf
+</code></pre><p>在最后一行添加</p>
+<pre><code>anon_root=/opt
+
+
+service vsftpd restart 
 chkconfig vsftpd on
-</code></pre><h2 id="openrc-sh配置"><a href="#openrc-sh配置" class="headerlink" title="openrc.sh配置"></a>openrc.sh配置</h2><p>安装xiandian<br>    yum install -y iaas-xiandian</p>
-<p>进入openrc.sh<br>     vi /etc/xiandian/openrc.sh</p>
+</code></pre><h2 id="openrc-sh配置"><a href="#openrc-sh配置" class="headerlink" title="openrc.sh配置"></a>openrc.sh配置</h2><p>安装xiandian</p>
+<pre><code>yum install -y iaas-xiandian
+</code></pre><p>进入openrc.sh<br>     vi /etc/xiandian/openrc.sh</p>
 <pre><code>##--------------------system config--------------------##
 ##Controller Server Manager IP. example:x.x.x.x
 HOST_IP=192.168.100.10
@@ -471,7 +491,7 @@ vi　/etc/yum.repos.d/yum.repo
         <p><span>本文标题:</span><a href="/2019/01/10/iaas搭建/">iaas搭建</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Evolto 的个人博客">Evolto</a></p>
         <p><span>发布时间:</span>2019年01月10日 - 18时19分</p>
-        <p><span>最后更新:</span>2019年01月15日 - 20时08分</p>
+        <p><span>最后更新:</span>2019年01月15日 - 20时11分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/01/10/iaas搭建/" title="iaas搭建">http://yoursite.com/2019/01/10/iaas搭建/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/01/10/iaas搭建/　　作者: Evolto" title=""></span>
