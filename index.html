@@ -592,8 +592,10 @@ service vsftpd restart
 chkconfig vsftpd on
 </code></pre><h2 id="openrc-sh配置"><a href="#openrc-sh配置" class="headerlink" title="openrc.sh配置"></a>openrc.sh配置</h2><p>安装xiandian</p>
 <pre><code>yum install -y iaas-xiandian
-</code></pre><p>进入openrc.sh<br>     vi /etc/xiandian/openrc.sh</p>
-<pre><code>##--------------------system config--------------------##
+</code></pre><p>进入openrc.sh</p>
+<pre><code> vi /etc/xiandian/openrc.sh
+
+##--------------------system config--------------------##
 ##Controller Server Manager IP. example:x.x.x.x
 HOST_IP=192.168.100.10
 
