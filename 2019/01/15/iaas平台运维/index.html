@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="L C K">
 <meta property="og:description" content="Iaas 平台运维 RABBIT每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机。每一个vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的交换机、队列、绑定等，拥有自己的权限机制。vhost之于Rabbit就像虚拟机之于物理机一样。他们通过在各个实例间提供逻辑上分离，允许为不同的应用程序安全保密的运行数据，这很有，它既能将同一个Rabbit的众多客户区分开来">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-15T10:45:27.200Z">
+<meta property="og:updated_time" content="2019-01-15T11:08:09.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iaas平台运维">
 <meta name="twitter:description" content="Iaas 平台运维 RABBIT每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机。每一个vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的交换机、队列、绑定等，拥有自己的权限机制。vhost之于Rabbit就像虚拟机之于物理机一样。他们通过在各个实例间提供逻辑上分离，允许为不同的应用程序安全保密的运行数据，这很有，它既能将同一个Rabbit的众多客户区分开来">
@@ -304,7 +304,7 @@
           
         <pre><code>Iaas 平台运维
 </code></pre><h2 id="RABBIT"><a href="#RABBIT" class="headerlink" title="RABBIT"></a>RABBIT</h2><p>每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机。每一个vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的交换机、队列、绑定等，拥有自己的权限机制。vhost之于Rabbit就像虚拟机之于物理机一样。他们通过在各个实例间提供逻辑上分离，允许为不同的应用程序安全保密的运行数据，这很有，它既能将同一个Rabbit的众多客户区分开来，又可以避免队列和交换器的命名冲突。RabbitMQ提供了开箱即用的默认的虚拟主机“/”，如果不需要多个vhost可以直接使用这个默认的vhost，通过使用缺省的guest用户名和guest密码来访问默认的vhost。</p>
-<p>1.创建虚拟主机<br>                     rabbitmqctl add_vhost vhostpath </p>
+<p>1.创建虚拟主机<br>                    ‘ rabbitmqctl add_vhost vhostpath ‘</p>
 <p>2.删除虚拟主机<br>                   rabbitmqctl delete_vhost vhostpath </p>
 <p>3.列出所有虚拟主机<br>                    rabbitmqctl list_vhosts </p>
 <p>4.列出虚拟主机上的所有权限<br>                   rabbitmqctl list_permissions [-p vhostpath]</p>
@@ -350,7 +350,7 @@
         <p><span>本文标题:</span><a href="/2019/01/15/iaas平台运维/">iaas平台运维</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Evolto 的个人博客">Evolto</a></p>
         <p><span>发布时间:</span>2019年01月15日 - 16时33分</p>
-        <p><span>最后更新:</span>2019年01月15日 - 18时45分</p>
+        <p><span>最后更新:</span>2019年01月15日 - 19时08分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/01/15/iaas平台运维/" title="iaas平台运维">http://yoursite.com/2019/01/15/iaas平台运维/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/01/15/iaas平台运维/　　作者: Evolto" title=""></span>

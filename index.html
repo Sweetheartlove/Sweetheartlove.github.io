@@ -301,7 +301,7 @@
           
         <pre><code>Iaas 平台运维
 </code></pre><h2 id="RABBIT"><a href="#RABBIT" class="headerlink" title="RABBIT"></a>RABBIT</h2><p>每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机。每一个vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的交换机、队列、绑定等，拥有自己的权限机制。vhost之于Rabbit就像虚拟机之于物理机一样。他们通过在各个实例间提供逻辑上分离，允许为不同的应用程序安全保密的运行数据，这很有，它既能将同一个Rabbit的众多客户区分开来，又可以避免队列和交换器的命名冲突。RabbitMQ提供了开箱即用的默认的虚拟主机“/”，如果不需要多个vhost可以直接使用这个默认的vhost，通过使用缺省的guest用户名和guest密码来访问默认的vhost。</p>
-<p>1.创建虚拟主机<br>                     rabbitmqctl add_vhost vhostpath </p>
+<p>1.创建虚拟主机<br>                    ‘ rabbitmqctl add_vhost vhostpath ‘</p>
 <p>2.删除虚拟主机<br>                   rabbitmqctl delete_vhost vhostpath </p>
 <p>3.列出所有虚拟主机<br>                    rabbitmqctl list_vhosts </p>
 <p>4.列出虚拟主机上的所有权限<br>                   rabbitmqctl list_permissions [-p vhostpath]</p>
@@ -460,49 +460,49 @@
       
           
         <p>IAAS平台</p>
-<h2 id="hostnamectl-set-hostname-controller-hostnamectl-set-hostname-compute"><a href="#hostnamectl-set-hostname-controller-hostnamectl-set-hostname-compute" class="headerlink" title="hostnamectl set-hostname controller        |         hostnamectl set-hostname compute"></a>hostnamectl set-hostname controller        |         hostnamectl set-hostname compute</h2><h2 id="编辑网卡e8-e9-e8要加GATEWAY-编辑网卡e8-e9-e8-要加GATEWAY"><a href="#编辑网卡e8-e9-e8要加GATEWAY-编辑网卡e8-e9-e8-要加GATEWAY" class="headerlink" title="编辑网卡e8 e9  e8要加GATEWAY                    |         编辑网卡e8 e9 e8 要加GATEWAY"></a>编辑网卡e8 e9  e8要加GATEWAY                    |         编辑网卡e8 e9 e8 要加GATEWAY</h2><pre><code>|            
-</code></pre><h2 id="setenforce-0-setenforce-0"><a href="#setenforce-0-setenforce-0" class="headerlink" title="setenforce   0                                  |   setenforce   0  "></a>setenforce   0                                  |   setenforce   0  </h2><p>vi /etc/hosts                    |  vi /etc/hosts</p>
-<h2 id="添加-ip-和-主机名映射-添加IP-和主机名映射"><a href="#添加-ip-和-主机名映射-添加IP-和主机名映射" class="headerlink" title="添加 ip 和 主机名映射                |    添加IP 和主机名映射"></a>添加 ip 和 主机名映射                |    添加IP 和主机名映射</h2><p>传包到控制节点下的/opt<br>cd /opt<br>mkdir iaas centos7 </p>
+<p>hostnamectl set-hostname controller        |         hostnamectl set-hostname compute</p>
+<p>编辑网卡e8 e9  e8要加GATEWAY                    |         编辑网卡e8 e9 e8 要加GATEWAY</p>
+<pre><code>|            
+</code></pre><p>setenforce   0                                  |   setenforce   0  </p>
+<p>vi /etc/hosts                    |  vi /etc/hosts<br>添加 ip 和 主机名映射                |    添加IP 和主机名映射</p>
+<p>传包到控制节点下的/opt<br>cd /opt<br>mkdir iaas centos7 </p>
 <p>rm -rf /etc/yum.repos.d/<em>            |   rm -rf /etc/yum.repos/</em><br>vi　/etc/yum.repos.d/yum.repo            |   vi　/etc/yum.repos.d/yum.repo<br>控制节点的yum源路径 为 file://挂载点        |    计算节点的yum源路径为   ftp://控制节点IP</p>
-<hr>
 <p>[centos]<br>name=centos<br>baseurl=file:///opt/centos<br>gpgcheck=0<br>enabled=1</p>
 <p>[iaas]<br>name=iaas<br>baseurl=file:///opt/iaas-repo<br>gpgcheck=0<br>enabled=1</p>
-<hr>
 <p>[centos]<br>name=centos<br>baseurl=<a href="ftp://192.168.10.10/centos/" target="_blank" rel="noopener">ftp://192.168.10.10/centos/</a><br>gpgcheck=0<br>enabled=1<br>[iaas]<br>name=iaas<br>baseurl=<a href="ftp://192.168.10.10/iaas-repo/" target="_blank" rel="noopener">ftp://192.168.10.10/iaas-repo/</a><br>gpgcheck=0<br>enabled=1</p>
-<hr>
 <p>控制节点yum list 成功后 装ftp<br>装完ftp 后<br>vi  /etc/vsftp/vsftpd.conf<br>在最后一行添加<br>anon_root=/opt</p>
 <p>service vsftpd restart<br>chkconfig vsftpd on</p>
-<hr>
 <p>yum -y install iaas-xiandian            | yum -y install iaas-xiandian</p>
 <p>sed ‘s/^#//g’ /etc/xiandian/openrc.sh  -i</p>
 <p>###在计算节点分区 分swift 和cinder<br>parted  /dev/md126</p>
 <p>print </p>
 <p>mkpart swift endgb  size_swiftgb</p>
 <p>mkpart cinder endgb  size_cindergb<br>q</p>
-<p>mkfs. xfs  /dev/md126p(分区时print的结果)</p>
-<h2 id="mkfs-xfs-dev-md126p-分区时print的结果"><a href="#mkfs-xfs-dev-md126p-分区时print的结果" class="headerlink" title="mkfs.xfs  /dev/md126p(分区时print的结果)"></a>mkfs.xfs  /dev/md126p(分区时print的结果)</h2><p>scp /etc/xiandian/o** root@compute:/etc/xiandian<br>输入计算节点密码</p>
+<p>mkfs. xfs  /dev/md126p(分区时print的结果)<br>mkfs.xfs  /dev/md126p(分区时print的结果)</p>
+<p>scp /etc/xiandian/o** root@compute:/etc/xiandian<br>输入计算节点密码</p>
 <p>ping compute                                    ping controller</p>
-<hr>
 <p>iaas-pre-host.sh                 |  iaas-pre-host.sh</p>
-<h2 id="reboot-reboot"><a href="#reboot-reboot" class="headerlink" title="reboot                    |   reboot"></a>reboot                    |   reboot</h2><p>注意 上面重启后再改</p>
+<p>reboot                    |   reboot</p>
+<p>注意 上面重启后再改</p>
 <p>vi /etc/ntp.conf</p>
 <p>在底部添加<br>server 127.127.1.0<br>fudge 127.127.1.0 stratum 10</p>
 <p>service ntpd restart<br>chkconfig ntpd on<br>date</p>
 <pre><code>| ntpdate controller
 | chkconfig ntpdate on
-</code></pre><hr>
-<pre><code>|yum list
-</code></pre><hr>
-<p>iaas-install-mysql.sh</p>
+
+
+
+|yum list
+</code></pre><p>iaas-install-mysql.sh</p>
 <p>iaas-install-keystone.sh</p>
 <p>source /etc/keystone/admin-openrc.sh </p>
 <p>openstack user list</p>
 <p>iaas-install-glance.sh</p>
 <p>glance image-create –name “centos7” –disk-format qcow2 –container-format bare &lt;/opt/iaas/images/c***7(不执行 复制此步骤节省时间)</p>
-<hr>
-<p>source /etc/keystone/admin-openrc.sh </p>
-<h2 id="openstack-user-list"><a href="#openstack-user-list" class="headerlink" title="openstack user list"></a>openstack user list</h2><p>iaas-install-nova-controller.sh            |   iaas-install-nova-compute.sh<br>iaas-install-neutron-controller.sh        |   iaas-install-neutron-compute.sh</p>
-<h2 id="iaas-install-neutron-controller-gre-sh-iaas-install-neutron-compute-gre-sh"><a href="#iaas-install-neutron-controller-gre-sh-iaas-install-neutron-compute-gre-sh" class="headerlink" title="iaas-install-neutron-controller-gre.sh        |   iaas-install-neutron-compute-gre.sh"></a>iaas-install-neutron-controller-gre.sh        |   iaas-install-neutron-compute-gre.sh</h2><h2 id="iaas-install-dashboard-sh"><a href="#iaas-install-dashboard-sh" class="headerlink" title="iaas-install-dashboard.sh"></a>iaas-install-dashboard.sh</h2><p>页面操作<br>输入控制节点ip/dashboard<br>创建内部网络（不共享，不勾选外部网络）<br>创建外部网络  （共享，外部网络，）<br>点击外部网络 （里面是添加的e9（第二个网卡的网段）网卡的网段的ip，要网关）</p>
+<p>source /etc/keystone/admin-openrc.sh<br>openstack user list</p>
+<p>iaas-install-nova-controller.sh            |   iaas-install-nova-compute.sh<br>iaas-install-neutron-controller.sh        |   iaas-install-neutron-compute.sh<br>iaas-install-neutron-controller-gre.sh        |   iaas-install-neutron-compute-gre.sh</p>
+<p>iaas-install-dashboard.sh</p>
+<p>页面操作<br>输入控制节点ip/dashboard<br>创建内部网络（不共享，不勾选外部网络）<br>创建外部网络  （共享，外部网络，）<br>点击外部网络 （里面是添加的e9（第二个网卡的网段）网卡的网段的ip，要网关）</p>
 <p>点击内部网络 （里面的ip根据考试内容或者自己定义，要网关）</p>
 <p>添加路由<br>添加内部接口<br>添加规则 icmp udp tcp  （出入都要添加）<br>然后起云实例<br>之后的 cinder swift alarm ceilometer heat 都有脚本安装  耗时大概20分钟</p>
 <p>起云实例给PAAS队友练习需要等待40分钟左右<br>搭建bigdata 需要1个小时左右<br>PAAS建立起来大概需要1个小时</p>
@@ -514,7 +514,8 @@
 <p>起始环境<br>crt 至少应该连接四台机器</p>
 <p>1 ftp源即IAAS控制节点<br>2 server  (vnc1)<br>3 client  (vnc2)<br>4 regiest (vnc3)</p>
 <p>进入平台后<br>ftp源搭建  创建/opt/docker目录 拷贝光盘下得所有软件到此目录</p>
-<h2 id="准备工作-需要在三台vnc上都执行"><a href="#准备工作-需要在三台vnc上都执行" class="headerlink" title="准备工作 需要在三台vnc上都执行"></a>准备工作 需要在三台vnc上都执行</h2><p>修改yum<br>rm -rfv *<br>vi yum.repo</p>
+<p>准备工作 需要在三台vnc上都执行</p>
+<p>修改yum<br>rm -rfv *<br>vi yum.repo</p>
 <p>[centos]<br>name=centos<br>baseurl=<a href="ftp://192.168.10.10/centos" target="_blank" rel="noopener">ftp://192.168.10.10/centos</a><br>gpgcheck=0<br>enabled=1<br>[docker]<br>name=docker<br>baseurl=<a href="ftp://192.168.10.10/docker/docker" target="_blank" rel="noopener">ftp://192.168.10.10/docker/docker</a><br>gpgcheck=0<br>enabled=1</p>
 <p>iptables -F<br>iptables -X<br>iptables -Z<br>/usr/sbin/iptables-save<br>修改系统内核<br>vi /etc/sysctl.conf<br>显示内核信息<br>sysctl -p<br>yum install docker-io -y<br>修改配置文件———————————–注意REGHOST_IP就是（VNC中regiest的ip）<br>vi /etc/sysconfig/docker<br>ADD_REGISTRY=’–add-registry REGHOST_IP:5000’<br>INSECURE_REGISTRY=’–insecure-registry REGHOST_IP:5000’</p>
 <hr>
