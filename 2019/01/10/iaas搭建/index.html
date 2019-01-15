@@ -9,17 +9,17 @@
   
   <title>iaas搭建 | L C K</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="IAAS平台hostnamectl set-hostname controller        |         hostnamectl set-hostname compute 编辑网卡e8 e9  e8要加GATEWAY                    |         编辑网卡e8 e9 e8 要加GATEWAY |             setenforce   0">
+  <meta name="description" content="IAAS平台搭建 准备步骤和网卡要求1.创建2台虚拟机分别叫做controller computecontroller 为控制节点compute为计算节点 controller 和compute都需要2张网卡一张网卡连接内网一张连接外网 contronller网卡1 192.168.100.10  网卡2 192.168.200.10 compute网卡2 192.168.100.20  网卡2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iaas搭建">
 <meta property="og:url" content="http://yoursite.com/2019/01/10/iaas搭建/index.html">
 <meta property="og:site_name" content="L C K">
-<meta property="og:description" content="IAAS平台hostnamectl set-hostname controller        |         hostnamectl set-hostname compute 编辑网卡e8 e9  e8要加GATEWAY                    |         编辑网卡e8 e9 e8 要加GATEWAY |             setenforce   0">
+<meta property="og:description" content="IAAS平台搭建 准备步骤和网卡要求1.创建2台虚拟机分别叫做controller computecontroller 为控制节点compute为计算节点 controller 和compute都需要2张网卡一张网卡连接内网一张连接外网 contronller网卡1 192.168.100.10  网卡2 192.168.200.10 compute网卡2 192.168.100.20  网卡2">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-15T11:10:41.272Z">
+<meta property="og:updated_time" content="2019-01-15T12:08:20.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iaas搭建">
-<meta name="twitter:description" content="IAAS平台hostnamectl set-hostname controller        |         hostnamectl set-hostname compute 编辑网卡e8 e9  e8要加GATEWAY                    |         编辑网卡e8 e9 e8 要加GATEWAY |             setenforce   0">
+<meta name="twitter:description" content="IAAS平台搭建 准备步骤和网卡要求1.创建2台虚拟机分别叫做controller computecontroller 为控制节点compute为计算节点 controller 和compute都需要2张网卡一张网卡连接内网一张连接外网 contronller网卡1 192.168.100.10  网卡2 192.168.200.10 compute网卡2 192.168.100.20  网卡2">
   
     <link rel="alternative" href="/atom.xml" title="L C K" type="application/atom+xml">
   
@@ -302,65 +302,164 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="IAAS平台"><a href="#IAAS平台" class="headerlink" title="IAAS平台"></a>IAAS平台</h2><p>hostnamectl set-hostname controller        |         hostnamectl set-hostname compute</p>
-<p>编辑网卡e8 e9  e8要加GATEWAY                    |         编辑网卡e8 e9 e8 要加GATEWAY</p>
-<pre><code>|            
-</code></pre><p>setenforce   0                                  |   setenforce   0  </p>
-<p>vi /etc/hosts                    |  vi /etc/hosts<br>添加 ip 和 主机名映射                |    添加IP 和主机名映射</p>
-<p>传包到控制节点下的/opt<br>cd /opt<br>mkdir iaas centos7 </p>
-<p>rm -rf /etc/yum.repos.d/<em>            |   rm -rf /etc/yum.repos/</em><br>vi　/etc/yum.repos.d/yum.repo            |   vi　/etc/yum.repos.d/yum.repo<br>控制节点的yum源路径 为 file://挂载点        |    计算节点的yum源路径为   ftp://控制节点IP</p>
-<p>[centos]<br>name=centos<br>baseurl=file:///opt/centos<br>gpgcheck=0<br>enabled=1</p>
-<p>[iaas]<br>name=iaas<br>baseurl=file:///opt/iaas-repo<br>gpgcheck=0<br>enabled=1</p>
-<p>[centos]<br>name=centos<br>baseurl=<a href="ftp://192.168.10.10/centos/" target="_blank" rel="noopener">ftp://192.168.10.10/centos/</a><br>gpgcheck=0<br>enabled=1<br>[iaas]<br>name=iaas<br>baseurl=<a href="ftp://192.168.10.10/iaas-repo/" target="_blank" rel="noopener">ftp://192.168.10.10/iaas-repo/</a><br>gpgcheck=0<br>enabled=1</p>
-<p>控制节点yum list 成功后 装ftp<br>装完ftp 后<br>vi  /etc/vsftp/vsftpd.conf<br>在最后一行添加<br>anon_root=/opt</p>
-<p>service vsftpd restart<br>chkconfig vsftpd on</p>
-<p>yum -y install iaas-xiandian            | yum -y install iaas-xiandian</p>
-<p>sed ‘s/^#//g’ /etc/xiandian/openrc.sh  -i</p>
-<p>###在计算节点分区 分swift 和cinder<br>parted  /dev/md126</p>
-<p>print </p>
-<p>mkpart swift endgb  size_swiftgb</p>
-<p>mkpart cinder endgb  size_cindergb<br>q</p>
-<p>mkfs. xfs  /dev/md126p(分区时print的结果)<br>mkfs.xfs  /dev/md126p(分区时print的结果)</p>
-<p>scp /etc/xiandian/o** root@compute:/etc/xiandian<br>输入计算节点密码</p>
-<p>ping compute                                    ping controller</p>
-<p>iaas-pre-host.sh                 |  iaas-pre-host.sh</p>
-<p>reboot                    |   reboot</p>
-<p>注意 上面重启后再改</p>
-<p>vi /etc/ntp.conf</p>
-<p>在底部添加<br>server 127.127.1.0<br>fudge 127.127.1.0 stratum 10</p>
-<p>service ntpd restart<br>chkconfig ntpd on<br>date</p>
-<pre><code>| ntpdate controller
-| chkconfig ntpdate on
+        <p>IAAS平台搭建</p>
+<h2 id="准备步骤和网卡要求"><a href="#准备步骤和网卡要求" class="headerlink" title="准备步骤和网卡要求"></a>准备步骤和网卡要求</h2><p>1.创建2台虚拟机分别叫做controller compute<br>controller 为控制节点<br>compute为计算节点</p>
+<p>controller 和compute都需要2张网卡<br>一张网卡连接内网一张连接外网</p>
+<p>contronller网卡1 192.168.100.10  网卡2 192.168.200.10</p>
+<p>compute网卡2 192.168.100.20  网卡2 192.168.200.20</p>
+<h2 id="controller-yum源配置"><a href="#controller-yum源配置" class="headerlink" title="controller yum源配置"></a>controller yum源配置</h2><p>进入controller终端<br>    cd /opt<br>    mkdir iaas centos7<br>    rm -rf /etc/yum.repos.d/*<br>    vi　/etc/yum.repos.d/yum.repo<br>配置yum.repo<br>    [centos]<br>    name=centos<br>    baseurl=file:///opt/centos<br>    gpgcheck=0<br>    enabled=1</p>
+<pre><code>[iaas]
+name=iaas
+baseurl=file:///opt/iaas-repo
+gpgcheck=0
+enabled=1
+</code></pre><p>挂载光盘</p>
+<pre><code>mount -o loop /dev/sr0 /opt/centos
+mount -o loop /dev/sr1 /opt/iaas
+</code></pre><p>关闭防火墙<br>    setenforce   0<br>    systemctl stop firewalld<br>    systemctl disable firewalld</p>
+<h2 id="ftp配置"><a href="#ftp配置" class="headerlink" title="ftp配置"></a>ftp配置</h2><p>控制节点yum list 成功后 装ftp<br>装完ftp 后<br>    vi  /etc/vsftp/vsftpd.conf<br>在最后一行添加<br>    anon_root=/opt</p>
+<pre><code>service vsftpd restart 
+chkconfig vsftpd on
+</code></pre><h2 id="openrc-sh配置"><a href="#openrc-sh配置" class="headerlink" title="openrc.sh配置"></a>openrc.sh配置</h2><p>安装xiandian<br>    yum install -y iaas-xiandian</p>
+<p>进入openrc.sh<br>     vi /etc/xiandian/openrc.sh</p>
+<pre><code>##--------------------system config--------------------##
+##Controller Server Manager IP. example:x.x.x.x
+HOST_IP=192.168.100.10
 
+##Controller Server hostname. example:controller
+HOST_NAME=controller
 
+##Compute Node Manager IP. example:x.x.x.x
+HOST_IP_NODE=192.168.100.20
 
-|yum list
-</code></pre><p>iaas-install-mysql.sh</p>
-<p>iaas-install-keystone.sh</p>
-<p>source /etc/keystone/admin-openrc.sh </p>
-<p>openstack user list</p>
-<p>iaas-install-glance.sh</p>
-<p>glance image-create –name “centos7” –disk-format qcow2 –container-format bare &lt;/opt/iaas/images/c***7(不执行 复制此步骤节省时间)</p>
-<p>source /etc/keystone/admin-openrc.sh<br>openstack user list</p>
-<p>iaas-install-nova-controller.sh            |   iaas-install-nova-compute.sh<br>iaas-install-neutron-controller.sh        |   iaas-install-neutron-compute.sh<br>iaas-install-neutron-controller-gre.sh        |   iaas-install-neutron-compute-gre.sh</p>
-<p>iaas-install-dashboard.sh</p>
-<p>页面操作<br>输入控制节点ip/dashboard<br>创建内部网络（不共享，不勾选外部网络）<br>创建外部网络  （共享，外部网络，）<br>点击外部网络 （里面是添加的e9（第二个网卡的网段）网卡的网段的ip，要网关）</p>
-<p>点击内部网络 （里面的ip根据考试内容或者自己定义，要网关）</p>
-<p>添加路由<br>添加内部接口<br>添加规则 icmp udp tcp  （出入都要添加）<br>然后起云实例<br>之后的 cinder swift alarm ceilometer heat 都有脚本安装  耗时大概20分钟</p>
-<p>起云实例给PAAS队友练习需要等待40分钟左右<br>搭建bigdata 需要1个小时左右<br>PAAS建立起来大概需要1个小时</p>
-<p>也就是IAAS+PAAS+BIGDATA 耗时大概为3个小时左右<br>SDN耗时约为35分钟</p>
-<p>创建云主机是 选择内网 绑定外网的浮动ip即网卡二的地址段 </p>
-<p>iaas如果不能建立云主机  解决方法1</p>
-<p>systemctl restart mariadb<br>openstack-service restart            |    openstack-servicer restart</p>
-<p>PAAS/docker平台</p>
-<p>起始环境<br>crt 至少应该连接四台机器</p>
-<p>1 ftp源即IAAS控制节点<br>2 server  (vnc1)<br>3 client  (vnc2)<br>4 regiest (vnc3)</p>
-<p>进入平台后<br>ftp源搭建  创建/opt/docker目录 拷贝光盘下得所有软件到此目录</p>
-<p>准备工作 需要在三台vnc上都执行</p>
-<p>修改yum<br>rm -rfv *<br>vi yum.repo</p>
-<p>[centos]<br>name=centos<br>baseurl=<a href="ftp://192.168.10.10/centos" target="_blank" rel="noopener">ftp://192.168.10.10/centos</a><br>gpgcheck=0<br>enabled=1<br>[docker]<br>name=docker<br>baseurl=<a href="ftp://192.168.10.10/docker/docker" target="_blank" rel="noopener">ftp://192.168.10.10/docker/docker</a><br>gpgcheck=0<br>enabled=1</p>
-<p>iptables -F<br>iptables -X<br>iptables -Z<br>/usr/sbin/iptables-save<br>修改系统内核<br>vi /etc/sysctl.conf<br>显示内核信息<br>sysctl -p<br>yum install docker-io -y<br>修改配置文件———————————–注意REGHOST_IP就是（VNC中regiest的ip）<br>vi /etc/sysconfig/docker<br>ADD_REGISTRY=’–add-registry REGHOST_IP:5000’<br>INSECURE_REGISTRY=’–insecure-registry REGHOST_IP:5000’</p>
-<hr>
+##Compute Node hostname. example:compute
+HOST_NAME_NODE=compute
+
+##--------------------Rabbit config ------------------##
+##user for rabbit. example:openstack
+RABBIT_USER=openstack
+
+##Password for rabbit user .example:000000
+RABBIT_PASS=000000
+
+##--------------------MySQL config---------------------##
+##Password for MySQL root user . exmaple:000000
+DB_PASS=000000
+
+##--------------------Keystone config------------------##
+##Password for Keystore admin user. exmaple:000000
+DOMAIN_NAME=admin
+ADMIN_PASS=000000
+DEMO_PASS=000000
+
+##Password for Mysql keystore user. exmaple:000000
+KEYSTONE_DBPASS=000000
+
+##--------------------Glance config--------------------##
+##Password for Mysql glance user. exmaple:000000
+GLANCE_DBPASS=000000
+
+##Password for Keystore glance user. exmaple:000000
+GLANCE_PASS=000000
+
+##--------------------Nova config----------------------##
+##Password for Mysql nova user. exmaple:000000
+NOVA_DBPASS=000000
+
+##Password for Keystore nova user. exmaple:000000
+NOVA_PASS=000000
+
+##--------------------Neturon config-------------------##
+##Password for Mysql neutron user. exmaple:000000
+NEUTRON_DBPASS=000000
+
+##Password for Keystore neutron user. exmaple:000000
+NEUTRON_PASS=000000
+
+##metadata secret for neutron. exmaple:000000
+METADATA_SECRET=000000
+
+##External Network Interface. example:eth1
+INTERFACE_NAME=enp0s8
+
+##First Vlan ID in VLAN RANGE for VLAN Network. exmaple:101#
+#minvlan=101
+
+##Last Vlan ID in VLAN RANGE for VLAN Network. example:200#
+#maxvlan=200
+
+##--------------------Cinder config--------------------##
+##Password for Mysql cinder user. exmaple:000000
+CINDER_DBPASS=000000
+
+##Password for Keystore cinder user. exmaple:000000
+CINDER_PASS=000000
+
+##Cinder Block Disk. example:md126p3
+BLOCK_DISK=sdc1
+
+##--------------------Swift config---------------------##
+##Password for Keystore swift user. exmaple:000000
+SWIFT_PASS=000000
+
+##The NO1. NODE Object Disk for Swift. example:md126p4. The 2nd will be OBJECT_DISK_2
+OBJECT_DISK=sdb1
+
+##The NO1. NODE IP for Swift Storage Network. example:x.x.x.x. The 2nd will be STORAGE_LOCAL_NET_IP_2
+STORAGE_LOCAL_NET_IP=192.168.100.10
+
+##--------------------Heat config----------------------##
+##Password for Mysql heat user. exmaple:000000
+HEAT_DBPASS=000000
+
+##Password for Keystore heat user. exmaple:000000
+HEAT_PASS=000000
+
+##--------------------Ceilometer config----------------##
+##Password for Mysql ceilometer user. exmaple:000000
+CEILOMETER_DBPASS=000000
+
+##Password for Keystore ceilometer user. exmaple:000000
+CEILOMETER_PASS=000000
+
+##--------------------AODH config----------------##
+##Password for Mysql AODH user. exmaple:000000
+AODH_DBPASS=000000
+
+##Password for Keystore AODH user. exmaple:000000
+AODH_PASS=000000
+</code></pre><p>以上是更改之后的配置文件</p>
+<p>将次文件用scp命令发给compute节点</p>
+<pre><code>scp /etc/xiandian/o** root@compute:/etc/xiandian
+</code></pre><h2 id="controller节点服务的安装"><a href="#controller节点服务的安装" class="headerlink" title="controller节点服务的安装"></a>controller节点服务的安装</h2><p>然后进行安装脚本</p>
+<pre><code>iaas-pre-host.sh     
+</code></pre><p>然后重启<br>    reboot</p>
+<p>重启完成后安装mysql keystone glance nova neutron<br>安装mysql</p>
+<pre><code>iaas-install-mysql.sh
+</code></pre><p>安装keystone</p>
+<pre><code>iaas-install-keystone.sh
+</code></pre><p>安装完成后获取一下</p>
+<pre><code>source /etc/keystone/admin-openrc.sh 
+</code></pre><p>安装glance</p>
+<pre><code>iaas-install-glance.sh
+</code></pre><p>安装nova</p>
+<pre><code>iaas-install-nova-controller.sh    
+</code></pre><p>安装neutron</p>
+<pre><code>iaas-install-neutron-controller.sh
+</code></pre><p>安装neutron gre</p>
+<pre><code>iaas-install-neutron-controller-gre.sh
+</code></pre><p>最后安装</p>
+<pre><code>iaas-install-dashboard.sh
+</code></pre><p>到这里controller节点配置全部完成<br>接下来是compute节点配置</p>
+<h2 id="compute-yum源配置"><a href="#compute-yum源配置" class="headerlink" title="compute yum源配置"></a>compute yum源配置</h2><p>直接修改yum源为用ftp连接controller的yum源</p>
+<pre><code>rm -rf /etc/yum.repos.d/*        
+vi　/etc/yum.repos.d/yum.repo    
+</code></pre><p>配置文件如下<br>    [centos]<br>    name=centos<br>    baseurl=<a href="ftp://192.168.10.10/centos/" target="_blank" rel="noopener">ftp://192.168.10.10/centos/</a><br>    gpgcheck=0<br>    enabled=1<br>    [iaas]<br>    name=iaas<br>    baseurl=<a href="ftp://192.168.10.10/iaas-repo/" target="_blank" rel="noopener">ftp://192.168.10.10/iaas-repo/</a><br>    gpgcheck=0<br>    enabled=1</p>
+<h2 id="compute-服务安装"><a href="#compute-服务安装" class="headerlink" title="compute 服务安装"></a>compute 服务安装</h2><p>yum list能列出后安装xiandian<br>    yum install-y iaas-xiandian</p>
+<p>安装iaas脚本</p>
+<pre><code>iaas-pre-host.sh
+</code></pre><p>重启<br>    root<br>之后安装nova 和neutron<br>    iaas-install-nova-compute.sh<br>     iaas-install-neutron-compute.sh<br>     iaas-install-neutron-compute-gre.sh</p>
+<h2 id="完成之后"><a href="#完成之后" class="headerlink" title="完成之后"></a>完成之后</h2><p>云平台搭建就完成了<br>保证自己主机p和云平台内网互通<br>在ie浏览器输入<br>192.168.100.10/dashboard<br>接下来就是页面操作了</p>
 
       
     </div>
@@ -372,7 +471,7 @@
         <p><span>本文标题:</span><a href="/2019/01/10/iaas搭建/">iaas搭建</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Evolto 的个人博客">Evolto</a></p>
         <p><span>发布时间:</span>2019年01月10日 - 18时19分</p>
-        <p><span>最后更新:</span>2019年01月15日 - 19时10分</p>
+        <p><span>最后更新:</span>2019年01月15日 - 20时08分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/01/10/iaas搭建/" title="iaas搭建">http://yoursite.com/2019/01/10/iaas搭建/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/01/10/iaas搭建/　　作者: Evolto" title=""></span>
@@ -404,7 +503,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IAAS平台"><span class="toc-number">1.</span> <span class="toc-text">IAAS平台</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备步骤和网卡要求"><span class="toc-number">1.</span> <span class="toc-text">准备步骤和网卡要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#controller-yum源配置"><span class="toc-number">2.</span> <span class="toc-text">controller yum源配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ftp配置"><span class="toc-number">3.</span> <span class="toc-text">ftp配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#openrc-sh配置"><span class="toc-number">4.</span> <span class="toc-text">openrc.sh配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#controller节点服务的安装"><span class="toc-number">5.</span> <span class="toc-text">controller节点服务的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compute-yum源配置"><span class="toc-number">6.</span> <span class="toc-text">compute yum源配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compute-服务安装"><span class="toc-number">7.</span> <span class="toc-text">compute 服务安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完成之后"><span class="toc-number">8.</span> <span class="toc-text">完成之后</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
