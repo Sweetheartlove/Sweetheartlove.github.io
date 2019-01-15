@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="L C K">
 <meta property="og:description" content="Iaas 平台运维  RABBIT每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机。每一个vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的交换机、队列、绑定等，拥有自己的权限机制。vhost之于Rabbit就像虚拟机之于物理机一样。他们通过在各个实例间提供逻辑上分离，允许为不同的应用程序安全保密的运行数据，这很有，它既能将同一个Rabbit的众多客户区分开">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-15T10:39:37.568Z">
+<meta property="og:updated_time" content="2019-01-15T10:43:47.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iaas平台运维">
 <meta name="twitter:description" content="Iaas 平台运维  RABBIT每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机。每一个vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的交换机、队列、绑定等，拥有自己的权限机制。vhost之于Rabbit就像虚拟机之于物理机一样。他们通过在各个实例间提供逻辑上分离，允许为不同的应用程序安全保密的运行数据，这很有，它既能将同一个Rabbit的众多客户区分开">
@@ -305,9 +305,10 @@
         <pre><code>Iaas 平台运维
 </code></pre><hr>
 <h2 id="RABBIT"><a href="#RABBIT" class="headerlink" title="RABBIT"></a>RABBIT</h2><p>每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机。每一个vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的交换机、队列、绑定等，拥有自己的权限机制。vhost之于Rabbit就像虚拟机之于物理机一样。他们通过在各个实例间提供逻辑上分离，允许为不同的应用程序安全保密的运行数据，这很有，它既能将同一个Rabbit的众多客户区分开来，又可以避免队列和交换器的命名冲突。RabbitMQ提供了开箱即用的默认的虚拟主机“/”，如果不需要多个vhost可以直接使用这个默认的vhost，通过使用缺省的guest用户名和guest密码来访问默认的vhost。</p>
-<h2 id="1-创建虚拟主机"><a href="#1-创建虚拟主机" class="headerlink" title="1.创建虚拟主机 "></a>1.创建虚拟主机 </h2><h2 id="rabbitmqctl-add-vhost-vhostpath"><a href="#rabbitmqctl-add-vhost-vhostpath" class="headerlink" title=" rabbitmqctl add_vhost vhostpath "></a> rabbitmqctl add_vhost vhostpath </h2><p>2.删除虚拟主机<br> rabbitmqctl delete_vhost vhostpath </p>
-<p>3.列出所有虚拟主机<br>rabbitmqctl list_vhosts </p>
-<p>4.列出虚拟主机上的所有权限<br>| rabbitmqctl list_permissions [-p vhostpath]</p>
+<p>1.创建虚拟主机<br>                     rabbitmqctl add_vhost vhostpath </p>
+<p>2.删除虚拟主机<br>                   rabbitmqctl delete_vhost vhostpath </p>
+<p>3.列出所有虚拟主机<br>                    rabbitmqctl list_vhosts </p>
+<p>4.列出虚拟主机上的所有权限<br>                   rabbitmqctl list_permissions [-p vhostpath]</p>
 <p>5.删除用户<br>| rabbitmqctl delete_user username </p>
 <p>6.修改密码<br>| rabbitmqctl change_password username newpassword </p>
 <p>7.设置用户权限   [-p vhostpath]  是指设置用户在某个虚拟机上的权限<br>| rabbitmqctl set_permissions [-p vhostpath] username regexp regexp regexp </p>
@@ -350,7 +351,7 @@
         <p><span>本文标题:</span><a href="/2019/01/15/iaas平台运维/">iaas平台运维</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Evolto 的个人博客">Evolto</a></p>
         <p><span>发布时间:</span>2019年01月15日 - 16时33分</p>
-        <p><span>最后更新:</span>2019年01月15日 - 18时39分</p>
+        <p><span>最后更新:</span>2019年01月15日 - 18时43分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/01/15/iaas平台运维/" title="iaas平台运维">http://yoursite.com/2019/01/15/iaas平台运维/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/01/15/iaas平台运维/　　作者: Evolto" title=""></span>
@@ -378,7 +379,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RABBIT"><span class="toc-number">1.</span> <span class="toc-text">RABBIT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-创建虚拟主机"><span class="toc-number">2.</span> <span class="toc-text">1.创建虚拟主机 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rabbitmqctl-add-vhost-vhostpath"><span class="toc-number">3.</span> <span class="toc-text"> rabbitmqctl add_vhost vhostpath </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#memcached"><span class="toc-number">4.</span> <span class="toc-text">memcached</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OPENSTACK-命令"><span class="toc-number">5.</span> <span class="toc-text">OPENSTACK 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#openstack命令创建云主机"><span class="toc-number">6.</span> <span class="toc-text">openstack命令创建云主机</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RABBIT"><span class="toc-number">1.</span> <span class="toc-text">RABBIT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#memcached"><span class="toc-number">2.</span> <span class="toc-text">memcached</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OPENSTACK-命令"><span class="toc-number">3.</span> <span class="toc-text">OPENSTACK 命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#openstack命令创建云主机"><span class="toc-number">4.</span> <span class="toc-text">openstack命令创建云主机</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
