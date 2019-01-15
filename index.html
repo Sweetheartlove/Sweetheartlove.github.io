@@ -305,13 +305,19 @@
 <pre><code>rabbitmqctl add_vhost vhostpath                              
 </code></pre><p>2.删除虚拟主机 </p>
 <pre><code>rabbitmqctl delete_vhost vhostpath                                  
-</code></pre><p>3.列出所有虚拟主机<br>                    rabbitmqctl list_vhosts </p>
-<p>4.列出虚拟主机上的所有权限<br>                   rabbitmqctl list_permissions [-p vhostpath]</p>
-<p>5.删除用户<br> rabbitmqctl delete_user username </p>
-<p>6.修改密码<br> rabbitmqctl change_password username newpassword </p>
-<p>7.设置用户权限   [-p vhostpath]  是指设置用户在某个虚拟机上的权限<br>rabbitmqctl set_permissions [-p vhostpath] username regexp regexp regexp </p>
-<p>8.清除用户权限<br> rabbitmqctl clear_permissions [-p vhostpath] username </p>
-<p>9.列出用户权限<br> rabbitmqctl list_user_permissions username</p>
+</code></pre><p>3.列出所有虚拟主机 </p>
+<pre><code>rabbitmqctl list_vhosts 
+</code></pre><p>4.列出虚拟主机上的所有权限 </p>
+<pre><code>rabbitmqctl list_permissions [-p vhostpath]
+</code></pre><p>5.删除用户 </p>
+<pre><code>rabbitmqctl delete_user username 
+</code></pre><p>6.修改密码</p>
+<pre><code>rabbitmqctl change_password username newpassword 
+</code></pre><p>7.设置用户权限   [-p vhostpath]  是指设置用户在某个虚拟机上的权限</p>
+<pre><code>rabbitmqctl set_permissions [-p vhostpath] username regexp regexp regexp 
+</code></pre><p>8.清除用户权限</p>
+<pre><code>rabbitmqctl clear_permissions [-p vhostpath] username 
+</code></pre><p>9.列出用户权限<br> rabbitmqctl list_user_permissions username</p>
 <p>10.设置用户角色 tagsName解释<br> rabbitmqctl set_user_tags username tagsname</p>
 <p>11.rabbitmqctl创建用户xiandianuser 密码为xiandian<br>rabbitmqctl add_user xiandianuser xiandian</p>
 <p>12.创建administrator角色<br> rabbitmqctl set_user_tags xiandianuser admin</p>
