@@ -302,9 +302,7 @@
         <pre><code>Iaas 平台运维
 </code></pre><hr>
 <h2 id="RABBIT"><a href="#RABBIT" class="headerlink" title="RABBIT"></a>RABBIT</h2><p>每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机。每一个vhost本质上是一个mini版的RabbitMQ服务器，拥有自己的交换机、队列、绑定等，拥有自己的权限机制。vhost之于Rabbit就像虚拟机之于物理机一样。他们通过在各个实例间提供逻辑上分离，允许为不同的应用程序安全保密的运行数据，这很有，它既能将同一个Rabbit的众多客户区分开来，又可以避免队列和交换器的命名冲突。RabbitMQ提供了开箱即用的默认的虚拟主机“/”，如果不需要多个vhost可以直接使用这个默认的vhost，通过使用缺省的guest用户名和guest密码来访问默认的vhost。</p>
-<p>1.创建虚拟主机<br>…<br> rabbitmqctl add_vhost vhostpath<br>…<br>2.删除虚拟主机<br>| rabbitmqctl delete_vhost vhostpath </p>
-<p>3.列出所有虚拟主机<br>| rabbitmqctl list_vhosts </p>
-<p>4.列出虚拟主机上的所有权限<br>| rabbitmqctl list_permissions [-p vhostpath]</p>
+<h2 id="1-创建虚拟主机"><a href="#1-创建虚拟主机" class="headerlink" title="1.创建虚拟主机 "></a>1.创建虚拟主机 </h2><h2 id="rabbitmqctl-add-vhost-vhostpath"><a href="#rabbitmqctl-add-vhost-vhostpath" class="headerlink" title=" rabbitmqctl add_vhost vhostpath "></a> rabbitmqctl add_vhost vhostpath </h2><h2 id="2-删除虚拟主机"><a href="#2-删除虚拟主机" class="headerlink" title="2.删除虚拟主机 "></a>2.删除虚拟主机 </h2><h2 id="rabbitmqctl-delete-vhost-vhostpath"><a href="#rabbitmqctl-delete-vhost-vhostpath" class="headerlink" title=" rabbitmqctl delete_vhost vhostpath "></a> rabbitmqctl delete_vhost vhostpath </h2><h2 id="3-列出所有虚拟主机"><a href="#3-列出所有虚拟主机" class="headerlink" title="3.列出所有虚拟主机 "></a>3.列出所有虚拟主机 </h2><h2 id="rabbitmqctl-list-vhosts"><a href="#rabbitmqctl-list-vhosts" class="headerlink" title="rabbitmqctl list_vhosts "></a>rabbitmqctl list_vhosts </h2><p>4.列出虚拟主机上的所有权限<br>| rabbitmqctl list_permissions [-p vhostpath]</p>
 <p>5.删除用户<br>| rabbitmqctl delete_user username </p>
 <p>6.修改密码<br>| rabbitmqctl change_password username newpassword </p>
 <p>7.设置用户权限   [-p vhostpath]  是指设置用户在某个虚拟机上的权限<br>| rabbitmqctl set_permissions [-p vhostpath] username regexp regexp regexp </p>
