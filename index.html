@@ -336,7 +336,7 @@
 <pre><code>vi /etc/sysconfig/memcached
  cachesize =&quot;256&quot;
 ps -ef  grep memcacached
-</code></pre><p>3.进入keystone mysql </p>
+</code></pre><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>3.进入keystone mysql </p>
 <pre><code>mysql -ukeystone -p000000
 use keystone
 </code></pre><p>  user和local—user做联合跟新 </p>
@@ -400,7 +400,13 @@ openstack user list
 <p>查询镜像文件</p>
 <pre><code>  openstack image list
 +--------------------------------------+--------------+--------+
-</code></pre><p>  ID                                     Name           Status<br>    +————————————–+————–+——–+<br>      daaeb6b4-ec16-4e6f-a79a-c701fc64e8ed   centos7        active<br>      1b30658f-bed3-4ecf-a28f-6bbc7f5c2460   test1          active<br>      f487abd0-cf79-4913-aa63-d5416a42a236   cirros-0.3.5   active<br>    +————————————–+————–+——–+<br>可以选择image的名字也可以选择id</p>
+  ID                                     Name           Status  
++--------------------------------------+--------------+--------+
+  daaeb6b4-ec16-4e6f-a79a-c701fc64e8ed   centos7        active  
+  1b30658f-bed3-4ecf-a28f-6bbc7f5c2460   test1          active  
+  f487abd0-cf79-4913-aa63-d5416a42a236   cirros-0.3.5   active  
++--------------------------------------+--------------+--------+
+</code></pre><p>可以选择image的名字也可以选择id</p>
 <p>查询安全组</p>
 <pre><code>  openstack security group list
 +----------------------+---------+----------------------+------------------------+
