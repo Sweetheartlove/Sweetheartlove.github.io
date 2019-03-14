@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl">
+  
+  
+  
+  
+  <title>大数据平台搭建 | 我们是八强</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大数据平台搭建1.大数据简介“大数据”是一个体量特别大，数据类别特别庞杂的数据集合，并且这样的数据集无法用传统数据库工具或常规软件工具抓取、管理和处理其内容。大数据技术是指从各种各样类型的庞杂数据中，快速的获取有价值的信息的能力。适用于大数据的技术包括大规模并行处理数据库，数据挖掘电网，分布式文件系统，分布式数据库，云计算平台和可扩展的存储系统。Apache的Hadoop项目是可靠的、可扩展的、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据平台搭建">
+<meta property="og:url" content="http://yoursite.com/2019/01/19/大数据平台搭建/index.html">
+<meta property="og:site_name" content="我们是八强">
+<meta property="og:description" content="大数据平台搭建1.大数据简介“大数据”是一个体量特别大，数据类别特别庞杂的数据集合，并且这样的数据集无法用传统数据库工具或常规软件工具抓取、管理和处理其内容。大数据技术是指从各种各样类型的庞杂数据中，快速的获取有价值的信息的能力。适用于大数据的技术包括大规模并行处理数据库，数据挖掘电网，分布式文件系统，分布式数据库，云计算平台和可扩展的存储系统。Apache的Hadoop项目是可靠的、可扩展的、">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-01T04:46:54.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据平台搭建">
+<meta name="twitter:description" content="大数据平台搭建1.大数据简介“大数据”是一个体量特别大，数据类别特别庞杂的数据集合，并且这样的数据集无法用传统数据库工具或常规软件工具抓取、管理和处理其内容。大数据技术是指从各种各样类型的庞杂数据中，快速的获取有价值的信息的能力。适用于大数据的技术包括大规模并行处理数据库，数据挖掘电网，分布式文件系统，分布式数据库，云计算平台和可扩展的存储系统。Apache的Hadoop项目是可靠的、可扩展的、">
+  
+    <link rel="alternative" href="/atom.xml" title="我们是八强" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/1.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/3.png" class="js-avatar">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Badwoman__</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">这个世界非黑即白，而你是彩色</p>
+        
+        
+            <form>
+                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder="搜索一下" autocomplete="off">
+            </form>
+            <div id="local-search-result"></div>
+        
+        
+            <script type="text/javascript">
+                (function() {
+                    'use strict';
+                    function getMatchData(keyword, data) {
+                        var matchData = [];
+                        for(var i =0;i<data.length;i++){
+                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
+                                matchData.push(data[i])
+                        }
+                        return matchData;
+                    }
+                    var $input = $('#local-search-input');
+                    var $resultContent = $('#local-search-result');
+                    $input.keyup(function(){
+                        $.ajax({
+                            url: '/search.json',
+                            dataType: "json",
+                            success: function( json ) {
+                                var str='<ul class=\"search-result-list\">';                
+                                var keyword = $input.val().trim().toLowerCase();
+                                $resultContent.innerHTML = "";
+                                if ($input.val().trim().length <= 0) {
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                }
+                                var results = getMatchData(keyword, json);
+                                if(results.length === 0){
+                                    $resultContent.empty();
+                                    $('#switch-area').show();
+                                    return;
+                                } 
+                                for(var i =0; i<results.length; i++){
+                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
+                                }
+                                str += "</ul>";
+                                $resultContent.empty();
+                                $resultContent.append(str);
+                                $('#switch-area').hide();
+                            }
+                        });
+                    });
+                })();
+            </script>
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                         <li>关于我</li>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="86" height="86" src="//music.163.com/outchain/player?type=3&id=1368013438&auto=1&height=66"></iframe>          
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+       
+                 <ul>
+                        
+                            <li><a href="/archives/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                        </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Sweetheartlove/Sweetheartlove.github.io" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.lincso.cn/">NMSL</a>
+                    
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">堕入无尽深渊</div>
+                </section>
+                
+                 </div>
+    </div></header></div>
+  <section class="switch-part switch-part3">
+     
+
+</section>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Badwoman__</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/3.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Badwoman__</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这个世界非黑即白，而你是彩色</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/Sweetheartlove/Sweetheartlove.github.io" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="/xxxxxxxx" title="weibo">weibo</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-大数据平台搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/19/大数据平台搭建/" class="article-date">
+      <time datetime="2019-01-19T08:48:05.000Z" itemprop="datePublished">2019-01-19</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      大数据平台搭建
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="大数据平台搭建"><a href="#大数据平台搭建" class="headerlink" title=" 大数据平台搭建"></a> 大数据平台搭建</h2><h2 id="1-大数据简介"><a href="#1-大数据简介" class="headerlink" title="1.大数据简介"></a>1.大数据简介</h2><p>“大数据”是一个体量特别大，数据类别特别庞杂的数据集合，并且这样的数据集无法用传统数据库工具或常规软件工具抓取、管理和处理其内容。大数据技术是指从各种各样类型的庞杂数据中，快速的获取有价值的信息的能力。适用于大数据的技术包括大规模并行处理数据库，数据挖掘电网，分布式文件系统，分布式数据库，云计算平台和可扩展的存储系统。<br>Apache的Hadoop项目是可靠的、可扩展的、开源的、分布式计算软件。Apache的Hadoop软件库是允许通过相对简单的程序模型构建计算集群为庞大的数据集进行分布式计算的框架。<br>Hadoop的设计思想可以将计算模式从单节点服务器扩展为数以千计的计算集群，每一个单独的服务器都提供自主的本地计算及存储能力。<br>对于高可用指标而言，Hadoop软件库自身可以通过检测和故障调试从应用层来实现高可用而不需要关心硬件底层的高可用性。所以提供一个计算集群上层的高可用服务对于集群故障修复而言就显得至关重要。<br><a id="more"></a></p>
+<h2 id="2。基本环境配置"><a href="#2。基本环境配置" class="headerlink" title="2。基本环境配置"></a>2。基本环境配置</h2><p>以两台节点为例来组件Hadoop分布式集群，这里采用的系统版本为Centos7，如下表所示：  </p>
+<pre><code>主机名    内存    硬盘    IP地址        角色
+
+master    8192MB    100G    192.168.200.131    Ambari-Server
+                    Ambari-Agent
+slave1    4096MB    100G    192.168.200.133    Ambari-Agent
+</code></pre><h2 id="3-配置主机名"><a href="#3-配置主机名" class="headerlink" title="3.配置主机名"></a>3.配置主机名</h2><p>master</p>
+<pre><code>hostnamectl set-hostname master
+ hostname master
+</code></pre><p>slave1</p>
+<pre><code>hostnamectl set-hostname slave1
+hostname slave1
+</code></pre><h2 id="4-修改hosts文件"><a href="#4-修改hosts文件" class="headerlink" title="4.修改hosts文件"></a>4.修改hosts文件</h2><p> master </p>
+<pre><code> vi /etc/hosts
+192.168.200.131 master.hadoop master
+192.168.200.133 slave1.hadoop
+</code></pre><p> slave1</p>
+<pre><code> vi /etc/hosts
+192.168.200.131 master.hadoop
+192.168.200.133 slave1.hadoop slave1
+</code></pre><h2 id="5-修改yum源"><a href="#5-修改yum源" class="headerlink" title="5.修改yum源"></a>5.修改yum源</h2><p>和iaas平台一样有2个节点所以方法也和iaas平台搭建修改yum的方式一样<br>一台镜像挂载 一台ftp连接</p>
+<pre><code>cd /opt
+
+mkdir centos ambari
+</code></pre><h2 id="6-禁用Transparent-Huge-Pages"><a href="#6-禁用Transparent-Huge-Pages" class="headerlink" title="6.禁用Transparent Huge Pages"></a>6.禁用Transparent Huge Pages</h2><p>操作系统后台有一个叫做khugepaged的进程，它会一直扫描所有进程占用的内存，在可能的情况下会把4kpage交换为Huge Pages，在这个过程中，对于操作的内存的各种分配活动都需要各种内存锁，直接影响程序的内存访问性能，并且，这个过程对于应用是透明的，在应用层面不可控制,对于专门为4k page优化的程序来说，可能会造成随机的性能下降现象。</p>
+<p> master &amp; slave1<br>直接重定向修改配置文件</p>
+<pre><code>echo never &gt; /sys/kernel/mm/transparent_hugepage/enabled
+echo never &gt; /sys/kernel/mm/transparent_hugepage/defrag
+</code></pre><p>重启后失效，需要再次执行</p>
+<h2 id="7-安装配置JDK"><a href="#7-安装配置JDK" class="headerlink" title="7.安装配置JDK"></a>7.安装配置JDK</h2><p>先在master节点上按装jdk</p>
+<pre><code>mkdir /usr/jdk64/
+</code></pre><p>进入到挂载大数据镜像的文件夹<br>找到 jdk压缩包 </p>
+<pre><code>cd /opt/ambari
+</code></pre><p>解压到/usr/jdk64/</p>
+<pre><code>tar -zxvf jdk-8u77-linux-x64.tar.gz -C /usr/jdk64/
+</code></pre><p>进入配置文件</p>
+<pre><code>vi /etc/profile
+</code></pre><p>修改java环境变量</p>
+<pre><code>export JAVA_HOME=/usr/jdk64/jdk1.8.0_77
+export PATH=$JAVA_HOME/bin:$PATH
+</code></pre><p>获取一下环境使其生效</p>
+<pre><code>source /etc/profile
+</code></pre><p>查看已安装的java版本 如果没有显示说明环境变量修改问题</p>
+<pre><code>java –version
+</code></pre><p>然后在slave1节点上安装jdk</p>
+<p>将maser上的jdk压缩包传输到slave1节点上</p>
+<pre><code>scp /opt/usr/jdk64/jdk-8u77-linux-x64.tar.gz 192.168.200.133：/opt/usr/jdk64/
+</code></pre><p>然后解压<br>修改环境变量<br>获取配置文件<br>查看版本</p>
+<h2 id="8-配置ambari-server"><a href="#8-配置ambari-server" class="headerlink" title="8.配置ambari-server"></a>8.配置ambari-server</h2><p>ambari-server只装在master上</p>
+<p>使用yum源安装</p>
+<pre><code>yum -y install  ambari-server
+</code></pre><p>启动服务并且设置开机自启</p>
+<pre><code>systemctl enable mariadb
+systemctl start mariadb
+</code></pre><h2 id="9-安装MariaDB数据库"><a href="#9-安装MariaDB数据库" class="headerlink" title="9.安装MariaDB数据库"></a>9.安装MariaDB数据库</h2><p>MariaDB数据库全部步骤中最关键最核心的一部分<br>配置在master上</p>
+<p>使用数据库安全配置向导为数据库设置密码</p>
+<pre><code>mysql_secure_installation
+</code></pre><p>按enter确认后设置数据库root密码，我们这里设置为“bigdata”<br>以下是向导过程</p>
+<pre><code>Remove anonymous users? [Y/n] y
+Remove anonymous users? [Y/n] y
+Disallow root login remotely? [Y/n] n
+Remove test database and access to it? [Y/n] y
+Reload privilege tables now? [Y/n] y
+</code></pre><p>配置完成后使用root用户进如创建ambari数据库</p>
+<pre><code>mysql -uroot -pbigdata
+</code></pre><p>数据库内部命令</p>
+<p>10.创建ambari;数据库</p>
+<pre><code>MariaDB [(none)]&gt; create database ambari;
+</code></pre><p>grant命令给予本地用户和全部ip权限</p>
+<pre><code>MariaDB [(none)]&gt; grant all privileges on ambari.* to &apos;ambari&apos;@&apos;localhost&apos; identified by &apos;bigdata&apos;;
+MariaDB [(none)]&gt; grant all privileges on ambari.* to &apos;ambari&apos;@&apos;%&apos; identified by &apos;bigdata&apos;;
+</code></pre><p>进入ambari数据库</p>
+<pre><code>MariaDB [(none)]&gt; use ambari;
+</code></pre><p>获取一下ambari-server下面的sql文件</p>
+<pre><code>MariaDB [ambari]&gt; source /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql
+</code></pre><p>完成退出</p>
+<pre><code>MariaDB [ambari]&gt; quit
+</code></pre><h2 id="11-安装配置ambari-server"><a href="#11-安装配置ambari-server" class="headerlink" title="11.安装配置ambari-server"></a>11.安装配置ambari-server</h2><p>配置在master上<br>进入配置文件</p>
+<pre><code>vi /etc/profile
+</code></pre><p>在文件中添加一条命令</p>
+<pre><code>export buildNumber=2.6.0.0
+</code></pre><p>启动ambari-setup安装向导</p>
+<pre><code>ambari-server setup
+</code></pre><p>一下向导过程</p>
+<pre><code>WARNING: SELinux is set to &apos;permissive&apos; mode and temporarily disabled.
+OK to continue [y/n] (y)? 
+Customize user account for ambari-server daemon [y/n] (n)? n
+Checking JDK...
+[1] Oracle JDK 1.8 + Java Cryptography Extension (JCE) Policy Files 8
+[2] Oracle JDK 1.7 + Java Cryptography Extension (JCE) Policy Files 7
+[3] Custom JDK
+==============================================================================
+Enter choice (1): 3
+Path to JAVA_HOME: /usr/jdk64/jdk1.8.0_77
+Validating JDK on Ambari Server...done.
+Completing setup...
+Configuring database... 
+Enter advanced database configuration [y/n] (n)? y
+Configuring database...
+====================================================================
+Choose one of the following options:
+[1] - PostgreSQL (Embedded)
+[2] - Oracle
+[3] - MySQL
+[4] - PostgreSQL
+[5] - Microsoft SQL Server (Tech Preview)
+[6] - SQL Anywhere
+</code></pre><p>====================================================================<br>    Enter choice (1): 3<br>    Hostname (localhost):<br>    Port (3306):<br>    Database name (ambari):<br>    Username (ambari):<br>    Enter Database Password (bigdata):<br>    Proceed with configuring remote database connection properties [y/n] (y)?<br>    Ambari Server ‘setup’ completed successfully.</p>
+<p>键入mysql连接驱动</p>
+<pre><code>ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
+</code></pre><p>启动ambari-server服务</p>
+<pre><code>mbari-server start
+</code></pre><h2 id="12配置ambari-agent"><a href="#12配置ambari-agent" class="headerlink" title="12配置ambari-agent"></a>12配置ambari-agent</h2><p>maser slave1 都要安装</p>
+<p>yum安装</p>
+<pre><code>yum -y install ambari-agent
+</code></pre><p>进入配置文件</p>
+<pre><code>vi /etc/ambari-agent/conf/ambari-agent.ini、
+</code></pre><p>修改hosname为master 2台都一样</p>
+<pre><code>hostname= master.hadoop
+</code></pre><p>服务重启</p>
+<pre><code>ambari-agent restart
+</code></pre><p>使用tail命令监视一下ambari-agent.log 日志结尾更新</p>
+<pre><code>tail -f /var/log/ambari-agent/ambari-agent.log
+</code></pre><p>2台主机都能获取成功平台也就成功搭建完成</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/01/19/大数据平台搭建/">大数据平台搭建</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Badwoman__ 的个人博客">Badwoman__</a></p>
+        <p><span>发布时间:</span>2019年01月19日 - 16时48分</p>
+        <p><span>最后更新:</span>2019年03月01日 - 12时46分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/01/19/大数据平台搭建/" title="大数据平台搭建">http://yoursite.com/2019/01/19/大数据平台搭建/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/01/19/大数据平台搭建/　　作者: Badwoman__" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2019/03/01/运维/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          运维
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/12/kali-Linux-Aircrack-ng-wifi-攻击/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">kali Linux  Aircrack-ng wifi 攻击 </div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#大数据平台搭建"><span class="toc-number">1.</span> <span class="toc-text"> 大数据平台搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-大数据简介"><span class="toc-number">2.</span> <span class="toc-text">1.大数据简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2。基本环境配置"><span class="toc-number">3.</span> <span class="toc-text">2。基本环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-配置主机名"><span class="toc-number">4.</span> <span class="toc-text">3.配置主机名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-修改hosts文件"><span class="toc-number">5.</span> <span class="toc-text">4.修改hosts文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-修改yum源"><span class="toc-number">6.</span> <span class="toc-text">5.修改yum源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-禁用Transparent-Huge-Pages"><span class="toc-number">7.</span> <span class="toc-text">6.禁用Transparent Huge Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-安装配置JDK"><span class="toc-number">8.</span> <span class="toc-text">7.安装配置JDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-配置ambari-server"><span class="toc-number">9.</span> <span class="toc-text">8.配置ambari-server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-安装MariaDB数据库"><span class="toc-number">10.</span> <span class="toc-text">9.安装MariaDB数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-安装配置ambari-server"><span class="toc-number">11.</span> <span class="toc-text">11.安装配置ambari-server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12配置ambari-agent"><span class="toc-number">12.</span> <span class="toc-text">12配置ambari-agent</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/03/01/运维/" title="上一篇: 运维">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/01/12/kali-Linux-Aircrack-ng-wifi-攻击/" title="下一篇: kali Linux  Aircrack-ng wifi 攻击 ">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/运维/">运维</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/19/大数据平台搭建/">大数据平台搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/12/kali-Linux-Aircrack-ng-wifi-攻击/">kali Linux  Aircrack-ng wifi 攻击 </a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/10/iaas搭建/">iaas搭建</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 Badwoman__
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = D:\Sweetheartlove\themes\qq\source\background\6.png;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
